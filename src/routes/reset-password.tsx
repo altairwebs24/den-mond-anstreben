@@ -1,0 +1,7 @@
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
+export const Route = createFileRoute("/reset-password")({ component: ResetPassword });
+function ResetPassword() { const navigate = useNavigate(); const [password, setPassword] = useState(""); const [message, setMessage] = useState(""); return <div className="mx-auto max-w-md px-4 py-20"><h1 className="font-display text-4xl uppercase">Set new password</h1><Input className="mt-8" type="password" minLength={8} maxLength={72} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="New password"/><Button className="mt-4 w-full" onClick={async () => { const hash = new URLSearchParams(window.location.hash.slice(1)); if (hash.get("type") !== "recovery" && !window.location.hash) { setMessage("Open the reset link from your email."); return; } const { error } = await supabase.auth.updateUser({ password }); if (error) setMessage(error.message); else navigate({ to: "/admin" }); }}>Update password</Button>{message && <p className="mt-4 text-sm text-destructive">{message}</p>}</div>; }
