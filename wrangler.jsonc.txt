@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "nthumeni-architecture-showcase-545e9666",
-  "compatibility_date": "2026-06-01",
+  "name": "den-mond-anstreben",
+  "compatibility_date": "2026-06-13",
   "observability": {
     "enabled": true
   },
